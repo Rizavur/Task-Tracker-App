@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "751025995683",
-    "project_id": "task-tracker-app-27ba6",
-    "storage_bucket": "task-tracker-app-27ba6.appspot.com"
+    "project_number": "22716272242",
+    "project_id": "task-tracker-app-5ef07",
+    "storage_bucket": "task-tracker-app-5ef07.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:751025995683:android:1e768ac01055d025726416",
+        "mobilesdk_app_id": "1:22716272242:android:1c3b5cfd5c9803b0a77ceb",
         "android_client_info": {
           "package_name": "com.rizavur.task_tracker_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "751025995683-c9frtnmdffkcjed6fp7nveqci6bdfn4q.apps.googleusercontent.com",
+          "client_id": "22716272242-9v6nemt57diu5op0cidvtf38m81gpsru.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAhmbpsaA2BaLd3dcMhtrskjwvC-wppDng"
+          "current_key": "AIzaSyBQRqB_Pp_htA9A50C3OdFf3q9er96i5c0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "751025995683-c9frtnmdffkcjed6fp7nveqci6bdfn4q.apps.googleusercontent.com",
+              "client_id": "22716272242-9v6nemt57diu5op0cidvtf38m81gpsru.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
