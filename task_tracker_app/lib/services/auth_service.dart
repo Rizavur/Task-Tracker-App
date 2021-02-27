@@ -15,9 +15,7 @@ class AuthService {
 
   // sign in anon
   signInAnonymously() async {
-    UserCredential userCredential = await _auth.signInAnonymously();
-    // onSignIn(userCredential.user);
-    // print(userCredential.user);
+    return await _auth.signInAnonymously();
   }
 
   // sign out

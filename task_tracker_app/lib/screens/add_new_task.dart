@@ -60,7 +60,6 @@ class _AddNewTaskState extends State<AddNewTask> {
                 onChanged: (val) {
                   setState(() => description = val);
                 },
-
               ),
               Padding(
                 padding: const EdgeInsets.all(15.0),

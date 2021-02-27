@@ -10,4 +10,20 @@ class DatabaseService {
       'description': description
     });
   }
+
+  Future getTaskList(String uid) async{
+    List taskList = [];
+    print(uid);
+    try {
+      await tasks.where('uid', isEqualTo: uid).get().then((querySnapshot) {
+        querySnapshot.docs.forEach((element) {
+          taskList.add(element.data());
+        });
+      });
+      return taskList;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 }
