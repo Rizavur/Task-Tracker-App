@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:task_tracker_app/services/auth_service.dart';
 
-class SignIn extends StatelessWidget {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+import 'loading.dart';
 
-  final Function(User) onSignIn;
-  SignIn({@required this.onSignIn});
+class SignIn extends StatefulWidget {
+  @override
+  _SignInState createState() => _SignInState();
+}
 
-  signInAnonymously() async {
-    UserCredential userCredential = await _auth.signInAnonymously();
-    onSignIn(userCredential.user);
-    print(userCredential.user);
-  }
+class _SignInState extends State<SignIn> {
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return loading ? Loading() : Container(
       padding: const EdgeInsets.only(top: 16.0),
       alignment: Alignment.center,
       child: RaisedButton(
           color: Colors.greenAccent[200],
           onPressed: () async {
-            signInAnonymously();
+            setState(() => loading = true);
+            dynamic result = await AuthService().signInAnonymously();
+            if (result == null) {
+              setState(() => loading = false);
+            }
           },
           child: Text("Anon Sign in")),
     );

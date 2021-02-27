@@ -9,7 +9,7 @@ class _ViewTasksState extends State<ViewTasks> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[600],
+      backgroundColor: Colors.black87,
     );
   }
 }

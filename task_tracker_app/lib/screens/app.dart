@@ -1,25 +1,22 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:task_tracker_app/screens/sign_in.dart';
 
 import 'home.dart';
 
-class Wrapper extends StatefulWidget {
+class App extends StatefulWidget {
   @override
-  _WrapperState createState() => _WrapperState();
+  _AppState createState() => _AppState();
 }
 
-class _WrapperState extends State<Wrapper> {
-  User user;
-  onRefresh(userCred) {
-    setState(() {
-      user = userCred;
-    });
-  }
+class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
+
     if (user == null) {
-      return SignIn(onSignIn: (userCred) => onRefresh(userCred),);
+      return SignIn();
     } else {
       return Home();
     }
