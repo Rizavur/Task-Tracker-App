@@ -140,7 +140,6 @@ class _AddNewTaskState extends State<AddNewTask> {
                         color: Colors.greenAccent
                       ),
                     )
-
                   ),
                 )
               ],

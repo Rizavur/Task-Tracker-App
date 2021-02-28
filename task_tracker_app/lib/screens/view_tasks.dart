@@ -73,100 +73,107 @@ class _ViewTasksState extends State<ViewTasks> {
 
   @override
   Widget build(BuildContext context) {
+
+    // Edit task
     void editModal(String title, String description, String taskid) {
       final formKey = GlobalKey<FormState>();
 
       showModalBottomSheet(
+          isScrollControlled: true,
           context: context, 
           backgroundColor: Colors.grey[800],
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               top: Radius.circular(30.0),
-              bottom: Radius.circular(0.0),
             )
           ), 
-          builder: (context) {
-        return GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: () {
-            FocusScopeNode currentFocus = FocusScope.of(context);
-            if (!currentFocus.hasPrimaryFocus) {
-              currentFocus.unfocus();
-            }
-          },
+          builder: (BuildContext context) {
+        return SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 35.0),
-            child:  Form(
-              key: formKey,
-              child: Column(
-                children: <Widget>[
-                  SizedBox(height: 10.0),
-                  Text(
-                    'Edit your task',
-                    style: TextStyle(
-                      fontSize: 23.0,
-                      color: Colors.white,
-                      fontFamily: 'Dosis'
-                    ),
-                  ),
-                  Divider(
-                    color: Colors.grey[600],
-                    height: 20,
-                    thickness: 2,
-                    indent: 10,
-                    endIndent: 10,
-                  ),
-                  SizedBox(height: 15.0),
-                  TextFormField(
-                    decoration: textInputDecoration.copyWith(hintText: 'Title'),
-                    validator: (val) => val.isEmpty ? "Please enter a title" : null,
-                    keyboardType: TextInputType.text,
-                    textCapitalization: TextCapitalization.sentences,
-                    onChanged: (val) {
-                      setState(() => title = val);
-                    },
-                    initialValue: title,
-                  ),
-                  SizedBox(height: 20.0),
-                  TextFormField(
-                    decoration: textInputDecoration.copyWith(hintText: 'Description'),
-                    validator: (val) => val.isEmpty ? "Please enter a description" : null,
-                    textCapitalization: TextCapitalization.sentences,
-                    maxLines: 8,
-                    onChanged: (val) {
-                      setState(() => description = val);
-                    },
-                    initialValue: description,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: RaisedButton(
-                        color: Colors.black,
-                        padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0),
+            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {
+                FocusScopeNode currentFocus = FocusScope.of(context);
+                if (!currentFocus.hasPrimaryFocus) {
+                  currentFocus.unfocus();
+                }
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 35.0),
+                child:  Form(
+                  key: formKey,
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(height: 10.0),
+                      Text(
+                        'Edit your task',
+                        style: TextStyle(
+                          fontSize: 23.0,
+                          color: Colors.white,
+                          fontFamily: 'Dosis'
                         ),
-                        child: Text(
-                          'Update',
-                          style: TextStyle(
-                            color: Colors.greenAccent,
-                            fontSize: 15.0,
-                          ),
-                        ),
-                        onPressed: () async {
-                          if (formKey.currentState.validate()) {
-                            await dbService.updateTaskData(uid, title, description, taskid);
-                            fetchTaskList();
-                            tasks.forEach((element) {print(element);});
-                            Navigator.pop(context);
-                            return _showToast();
-                            }
-                          }
-                        ),
-                  )
-                ],
+                      ),
+                      Divider(
+                        color: Colors.grey[600],
+                        height: 20,
+                        thickness: 2,
+                        indent: 10,
+                        endIndent: 10,
+                      ),
+                      SizedBox(height: 15.0),
+                      TextFormField(
+                        decoration: textInputDecoration.copyWith(hintText: 'Title'),
+                        validator: (val) => val.isEmpty ? "Please enter a title" : null,
+                        keyboardType: TextInputType.text,
+                        textCapitalization: TextCapitalization.sentences,
+                        onChanged: (val) {
+                          setState(() => title = val);
+                        },
+                        initialValue: title,
+                      ),
+                      SizedBox(height: 20.0),
+                      TextFormField(
+                        decoration: textInputDecoration.copyWith(hintText: 'Description'),
+                        validator: (val) => val.isEmpty ? "Please enter a description" : null,
+                        textCapitalization: TextCapitalization.sentences,
+                        maxLines: 8,
+                        onChanged: (val) {
+                          setState(() => description = val);
+                        },
+                        initialValue: description,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0.0, 23.0, 0.0, 0.0),
+                        child: RaisedButton(
+                            color: Colors.black,
+                            padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                            ),
+                            child: Text(
+                              'Update',
+                              style: TextStyle(
+                                color: Colors.greenAccent,
+                                fontSize: 15.0,
+                              ),
+                            ),
+                            onPressed: () async {
+                              if (formKey.currentState.validate()) {
+                                await dbService.updateTaskData(uid, title, description, taskid);
+                                fetchTaskList();
+                                tasks.forEach((element) {print(element);});
+                                Navigator.pop(context);
+                                return _showToast();
+                                }
+                              }
+                            ),
+                      )
+                    ],
+                  ),
+                )
               ),
-            )
+            ),
           ),
         );
       });
