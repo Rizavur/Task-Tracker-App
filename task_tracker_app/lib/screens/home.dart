@@ -32,7 +32,13 @@ class _HomeState extends State<Home> {
 
     return loading ? Loading() : Scaffold(
       appBar: AppBar(
-        title: Text("Task Tracker"),
+        title: Text(
+          "Task Tracker",
+          style: TextStyle(
+            fontFamily: 'Dosis',
+            fontSize: 28.0
+          ),
+        ),
         backgroundColor: Colors.black,
         centerTitle: true,
         elevation: 0,
@@ -40,7 +46,7 @@ class _HomeState extends State<Home> {
           IconButton(
             icon: Icon(
               Icons.logout,
-              color: Colors.white,
+              color: Colors.greenAccent,
             ),
             onPressed: () async {
               setState(() => loading = true);
@@ -54,12 +60,15 @@ class _HomeState extends State<Home> {
       ),
       body: _children.elementAt(_currentIndex),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.black,
+        selectedItemColor: Colors.greenAccent,
+        unselectedItemColor: Colors.grey[700],
         currentIndex: _currentIndex,
         onTap: _onTabTapped,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'Add New Task',
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.list),
